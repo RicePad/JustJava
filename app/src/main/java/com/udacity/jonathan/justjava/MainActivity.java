@@ -25,23 +25,44 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
     }
 
     /**
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        int price = quantity * 5;
-        String priceMessage = "Total: $" + price;
-        priceMessage = priceMessage + ", \n Thank you!";
+        int price = calculatePrice();
+        String priceMessage = createOrderSummary(price);
         displayMessage(priceMessage);
+
+        }
+
+
+
+    /**
+     * Calculates the price of the order.
+     *
+     */
+    private int calculatePrice() {
+        int price = quantity * 5;
+        return price;
     }
+
+    private String createOrderSummary(int price){
+        String priceMessage = "Name: Ricepad";
+        priceMessage = priceMessage + "\nQuantity: " + quantity;
+        priceMessage = "\nTotal: $" + price;
+        priceMessage = priceMessage + "\nThank you!";
+        return priceMessage;
+    }
+
 
     /**
      * This method displays the given quantity value on the screen.
      */
     private void display(int number) {
-        TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
+        TextView quantityTextView = (TextView) findViewById(R.id    .quantity_text_view);
         quantityTextView.setText("" + number);
     }
 
@@ -71,6 +92,9 @@ public class MainActivity extends AppCompatActivity {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
         priceTextView.setText(message);
     }
+
+
+
 
 
 }

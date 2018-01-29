@@ -9,11 +9,11 @@ package com.udacity.jonathan.justjava;
  **/
 
 
-         import android.os.Bundle;
-         import android.support.v7.app.AppCompatActivity;
-         import android.view.View;
-         import android.widget.TextView;
-         import java.text.NumberFormat;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.TextView;
 
 /**
  * This app displays an order form to order coffee.
@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
+        CheckBox whippedCreamCheckBox = findViewById(R.id.whipped_cream_checkbox);
+        boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
         int price = calculatePrice();
         String priceMessage = createOrderSummary(price);
         displayMessage(priceMessage);
@@ -49,10 +51,11 @@ public class MainActivity extends AppCompatActivity {
         return price;
     }
 
-    private String createOrderSummary(int price){
+    private String createOrderSummary(int price, boolean addWhippedCream){
         String priceMessage = "Name: Ricepad";
-        priceMessage = priceMessage + "\nQuantity: " + quantity;
         priceMessage = "\nTotal: $" + price;
+        priceMessage = priceMessage + "Add whipped cream " + addWhippedCream;
+        priceMessage = priceMessage + "\nQuantity: " + quantity;
         priceMessage = priceMessage + "\nThank you!";
         return priceMessage;
     }
@@ -67,13 +70,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /**
-     * This method displays the given price on the screen.
-     */
-    private void displayPrice(int number) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
-    }
+
 
     public void incrementQuantity(View view) {
         quantity = quantity + 1;
@@ -89,8 +86,8 @@ public class MainActivity extends AppCompatActivity {
      * This method displays the given text on the screen.
      */
     private void displayMessage(String message) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(message);
+        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
+        orderSummaryTextView.setText(message);
     }
 
 

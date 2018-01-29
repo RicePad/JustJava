@@ -3,6 +3,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Toppings"
+        android:textAllCaps="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Whipped cream"
+        android:layout_marginTop="24dp"
+        android:textSize="16sp"
+        />
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -45,11 +59,12 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/order_summary_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
-        android:text="PRICE"
+        android:text="ORDER SUMMARY"
         android:textSize="16sp" />
 
     <TextView

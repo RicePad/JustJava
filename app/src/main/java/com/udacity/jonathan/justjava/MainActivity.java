@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -32,12 +33,24 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
+
+        EditText nameField = (EditText) findViewById(R.id.name_input);
+        String name = nameField.getText().toString();
+
         CheckBox whippedCreamCheckBox = findViewById(R.id.whipped_cream_checkbox);
         boolean hasWhippedCream = whippedCreamCheckBox.isChecked();
-        int price = calculatePrice();
-        String priceMessage = createOrderSummary(price);
-        displayMessage(priceMessage);
 
+        CheckBox chocolateToppingCheckBox  = findViewById(R.id.chocoloate_topping);
+        boolean hasChocolate= chocolateToppingCheckBox.isChecked();
+
+
+
+        // Calculate the price
+        int price = calculatePrice();
+
+        // Display the order summary on the screen
+        String message = createOrderSummary(name, price, hasWhippedCream, hasChocolate);
+        displayMessage(message);
         }
 
 
@@ -51,14 +64,16 @@ public class MainActivity extends AppCompatActivity {
         return price;
     }
 
-    private String createOrderSummary(int price, boolean addWhippedCream){
-        String priceMessage = "Name: Ricepad";
-        priceMessage = "\nTotal: $" + price;
-        priceMessage = priceMessage + "Add whipped cream " + addWhippedCream;
-        priceMessage = priceMessage + "\nQuantity: " + quantity;
-        priceMessage = priceMessage + "\nThank you!";
+    private String createOrderSummary(String name, int price, boolean addWhippedCream, boolean addChocolate) {
+        String priceMessage = name;
+        priceMessage += "\nAdd whipped cream? " + addWhippedCream;
+        priceMessage += "\nAdd chocolate? " + addChocolate;
+        priceMessage += "\nQuantity: " + quantity;
+        priceMessage += "\nTotal: $" + price;
+        priceMessage += "\nThank you!";
         return priceMessage;
     }
+
 
 
     /**

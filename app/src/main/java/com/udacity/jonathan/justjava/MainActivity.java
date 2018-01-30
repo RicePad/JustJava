@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Calculate the price
-        int price = calculatePrice();
+        int price = calculatePrice(hasWhippedCream, hasChocolate);
 
         // Display the order summary on the screen
         String message = createOrderSummary(name, price, hasWhippedCream, hasChocolate);
@@ -59,9 +59,18 @@ public class MainActivity extends AppCompatActivity {
      * Calculates the price of the order.
      *
      */
-    private int calculatePrice() {
-        int price = quantity * 5;
-        return price;
+    private int calculatePrice(boolean addWhippedCream, boolean addChocolate) {
+
+        int price = 5;
+
+        if (addWhippedCream) {
+            price = price + 1;
+        }
+
+        if(addChocolate){
+            price = price + 2;
+        }
+        return price * quantity;
     }
 
     private String createOrderSummary(String name, int price, boolean addWhippedCream, boolean addChocolate) {
@@ -88,11 +97,17 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void incrementQuantity(View view) {
+        if(quantity == 100){
+            return;
+        }
         quantity = quantity + 1;
         display(quantity);
     }
 
     public void decrementQuantity(View view) {
+        if(quantity == 1){
+            return;
+        }
         quantity = quantity - 1;
         display(quantity);
     }
